@@ -19,9 +19,9 @@ public class GameManager : MonoBehaviour
     private int groundGauge = 0;
     private int airGauge = 0;
 
-    private float bossSkillCloudTimer = 0;
-    private float bossSkillGhostTimer = 0;
-    private float bossSkillReverseTimer = 0;
+    public float bossSkillCloudTimer = 0;
+    public float bossSkillGhostTimer = 0;
+    public float bossSkillReverseTimer = 0;
 
 
     private void Awake()
@@ -36,10 +36,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // 보스로 옮기기
-        bossSkillCloudTimer -= Time.deltaTime;
-        bossSkillGhostTimer -= Time.deltaTime;
-        bossSkillReverseTimer -= Time.deltaTime;
+        
     }
 
     public void UseBossSkillCloud()
@@ -48,7 +45,7 @@ public class GameManager : MonoBehaviour
     }
     public bool IsCloud()
     {
-        return bossSkillReverseTimer > 0;
+        return bossSkillCloudTimer > 0;
     }
     public void UseBossSkillGhost()
     {
@@ -56,7 +53,7 @@ public class GameManager : MonoBehaviour
     }
     public bool IsGhost()
     {
-        return bossSkillReverseTimer > 0;
+        return bossSkillGhostTimer > 0;
     }
     public void UseBossSkillReverse()
     {
