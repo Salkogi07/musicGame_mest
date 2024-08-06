@@ -6,11 +6,6 @@ public class BossController : MonoBehaviour
 {
     public GameObject reverseObj;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         BossSkill_CoolTime();
@@ -24,6 +19,10 @@ public class BossController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             GameManager.Instance.UseBossSkillReverse();
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            GameManager.Instance.UseBossSkillCloud();
         }
     }
 

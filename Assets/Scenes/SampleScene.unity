@@ -637,6 +637,7 @@ GameObject:
   - component: {fileID: 1481794607}
   - component: {fileID: 1481794606}
   - component: {fileID: 1481794605}
+  - component: {fileID: 1481794608}
   m_Layer: 0
   m_Name: BossTest
   m_TagString: Untagged
@@ -724,6 +725,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1481794608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481794604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68a6b7c36ceb724b86fe766d6fee14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 3173178886836493339, guid: 8cecd16269d4e514996e23c6c3a825ee, type: 3}
+  referenceObject: {fileID: 760233749}
+  spawnAreaMin: {x: 2, y: 8}
+  spawnAreaMax: {x: -2, y: 1}
 --- !u!1 &1734387183
 GameObject:
   m_ObjectHideFlags: 0
