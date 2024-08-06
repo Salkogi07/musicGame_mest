@@ -656,6 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f5b836abcb773419d6547f5a5e5937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reverseObj: {fileID: 926363461}
 --- !u!212 &1481794606
 SpriteRenderer:
   m_ObjectHideFlags: 0

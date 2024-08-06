@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
+    public GameObject reverseObj;
+
     void Start()
     {
         
@@ -11,15 +13,32 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
-        GameManager.Instance.bossSkillCloudTimer -= Time.deltaTime;
-        GameManager.Instance.bossSkillGhostTimer -= Time.deltaTime;
-        GameManager.Instance.bossSkillReverseTimer -= Time.deltaTime;
+        BossSkill_CoolTime();
 
-        if (Input.GetKeyDown(KeyCode.X))
+        BossSkill_Reverse();
+
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             GameManager.Instance.UseBossSkillGhost();
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            GameManager.Instance.UseBossSkillReverse();
+        }
     }
 
+    private void BossSkill_Reverse()
+    {
+        if (GameManager.Instance.IsReverse())
+            reverseObj.transform.localScale = new Vector3(1, -1, 1);
+        else
+            reverseObj.transform.localScale = new Vector3(1, 1, 1);
+    }
 
+    private static void BossSkill_CoolTime()
+    {
+        GameManager.Instance.bossSkillCloudTimer -= Time.deltaTime;
+        GameManager.Instance.bossSkillGhostTimer -= Time.deltaTime;
+        GameManager.Instance.bossSkillReverseTimer -= Time.deltaTime;
+    }
 }
