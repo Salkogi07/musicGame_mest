@@ -14,6 +14,7 @@ public class Note : MonoBehaviour
 
     public bool isPositionPressed;
     public bool isPositionMultiPressed;
+    public bool isIgnoreMiss;
 
     SpriteRenderer spriteRenderer;
 

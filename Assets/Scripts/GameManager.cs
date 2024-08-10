@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    private int groundGauge = 0;
-    private int airGauge = 0;
+    public int groundGauge = 0;
+    public int airGauge = 0;
 
     public float bossSkillCloudTimer = 0;
     public float bossSkillGhostTimer = 0;
@@ -66,7 +66,11 @@ public class GameManager : MonoBehaviour
 
     public void HitNoteWithGround(Note note, Judge judge)
     {
-        if (note.isMultiNode && note.IsBothPressed())
+        if (note.isIgnoreMiss)
+        {
+
+        }
+        else if (note.isMultiNode && note.IsBothPressed())
         {
             if (judge == Judge.Perfect)
             {
@@ -92,7 +96,11 @@ public class GameManager : MonoBehaviour
 
     public void HitNoteWithAir(Note note, Judge judge)
     {
-        if (note.isMultiNode)
+        if (note.isIgnoreMiss)
+        {
+
+        }
+        else if (note.isMultiNode)
         {
             if (judge == Judge.Perfect)
             {

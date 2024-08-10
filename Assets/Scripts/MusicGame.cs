@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+[System.Serializable]
+public class NotePrefabInfo
+{
+    public string name;
+    public GameObject prefab;
+}
+
 public class MusicGame : MonoBehaviour
 {
     private const float RADIUS = 1;
@@ -13,7 +20,12 @@ public class MusicGame : MonoBehaviour
     public GameObject[] noteInstances;
     public GameObject[] judges;
 
-    public GameObject[] score;
+    public NotePrefabInfo[] notePrefabs;
+    private Dictionary<string, GameObject> notePrefabDictionary = new Dictionary<string, GameObject>();
+
+    public TextAsset scoreFile;
+    private string[] lines;
+
     public float offset;
     public float bpm;
 
@@ -26,22 +38,35 @@ public class MusicGame : MonoBehaviour
     {
         audio.Play();
 
-        noteInstances = new GameObject[score.Length];
-
-        for (int i = 0; i < score.Length; i++)
+        foreach (var pair in notePrefabs)
         {
-            if (!score[i].GetComponent<Note>().isMultiNode)
+            notePrefabDictionary.Add(pair.name, pair.prefab);
+        }
+
+        string text = scoreFile.text.Replace("\r", "");
+        lines = text.Split("\n");
+
+        noteInstances = new GameObject[lines.Length];
+
+        for (int i = 0; i < lines.Length; i++)
+        {
+            if (!notePrefabDictionary.ContainsKey(lines[i]))
+                continue;
+
+            GameObject prefab = notePrefabDictionary[lines[i]];
+
+            if (!prefab.GetComponent<Note>().isMultiNode)
             {
-                int noteIndex = score[i].GetComponent<Note>().position - 1;
-                GameObject noteInstance = Instantiate(score[i], notes.transform);
+                int noteIndex = prefab.GetComponent<Note>().position - 1;
+                GameObject noteInstance = Instantiate(prefab, notes.transform);
                 noteInstance.transform.localPosition = Vector3.right * judges[noteIndex].transform.localPosition.x + Vector3.up * GameManager.SPEED * (60 / bpm * i + offset);
 
                 noteInstances[i] = noteInstance;
             }
             else
             {
-                int noteIndex = score[i].GetComponent<Note>().position - 1;
-                GameObject noteInstance = Instantiate(score[i], notes.transform);
+                int noteIndex = prefab.GetComponent<Note>().position - 1;
+                GameObject noteInstance = Instantiate(prefab, notes.transform);
                 noteInstance.transform.localPosition = Vector3.up * GameManager.SPEED * (60 / bpm * i + offset);
 
                 noteInstances[i] = noteInstance;
@@ -110,12 +135,12 @@ public class MusicGame : MonoBehaviour
 
     int GetCurrentNoteIndex() // 있는 노트의 인덱스를 찾아야 할 때
     {
-        return Mathf.Clamp(Mathf.RoundToInt((audio.time - offset) * bpm / 60), 0, score.Length - 1);
+        return Mathf.Clamp(Mathf.RoundToInt((audio.time - offset) * bpm / 60), 0, lines.Length - 1);
     }
 
     int GetLastNoteIndex() // 지나간 노트의 인덱스를 찾아야 할 때, -1 있을 수 있음 주의!!!
     {
-        return Mathf.Clamp(Mathf.RoundToInt((audio.time - offset) * bpm / 60) - 1, -1, score.Length - 1);
+        return Mathf.Clamp(Mathf.RoundToInt((audio.time - offset) * bpm / 60) - 1, -1, lines.Length - 1);
     }
 
     GameObject CurrentNote()
@@ -130,6 +155,9 @@ public class MusicGame : MonoBehaviour
 
     void TryHit(int scoreIndex, int noteIndex, bool isGround)
     {
+        if (scoreIndex < 0 || scoreIndex >= noteInstances.Length || noteInstances[scoreIndex] == null)
+            return;
+
         Note currentNode = noteInstances[scoreIndex].GetComponent<Note>();
 
         if (currentNode.IsCorrectKey(noteIndex))
