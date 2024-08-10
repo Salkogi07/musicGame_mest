@@ -509,7 +509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   maxHp: 100
-  attackTime: 0.2
+  attackTime: 0.5
   attackRange: 5
   attackDamage: 1
 --- !u!1 &493419349
