@@ -17,13 +17,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public int groundGauge = 0;
+    public int maxGroundGauge = 100;
     public int airGauge = 0;
+    public int maxAirGauge = 100;
 
     public float bossSkillCloudTimer = 0;
     public float bossSkillGhostTimer = 0;
     public float bossSkillReverseTimer = 0;
 
-    Player player;
+    public Player player;
 
 
     private void Awake()
