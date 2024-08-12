@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObstacleEnemy : MonoBehaviour
 {
     public GameObject obstacleObj;
+    public GameObject obstacleEffectObj;
     Enemy enemy;
 
     private void Awake()
@@ -21,6 +22,7 @@ public class ObstacleEnemy : MonoBehaviour
 
     void ObstacleSpanw()
     {
+        Instantiate(obstacleEffectObj, transform.position, Quaternion.identity);
         Instantiate(obstacleObj, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

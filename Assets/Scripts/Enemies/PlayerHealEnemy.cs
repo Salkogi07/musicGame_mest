@@ -21,5 +21,6 @@ public class PlayerHealEnemy : MonoBehaviour
     void Heal()
     {
         GameManager.Instance.Change_PlayerHp(50);
+        Destroy(gameObject);
     }
 }

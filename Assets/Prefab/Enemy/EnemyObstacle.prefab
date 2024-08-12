@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleObj: {fileID: 4810717969501892573, guid: d5bf943ab7e034f46b8b0e4938dec4d4, type: 3}
+  obstacleEffectObj: {fileID: 2663838122855006067, guid: 5458f511b88953b44a9664dda4a29236, type: 3}
 --- !u!50 &4256181652278600972
 Rigidbody2D:
   serializedVersion: 4
