@@ -10,12 +10,19 @@ public class Enemy : MonoBehaviour
 
     public float speed;
 
+    public bool isLive = true;
+
     public void Update()
     {
         if (hp <= 0)
-            gameObject.SetActive(false);
+            EnemyDie();
 
         transform.Translate((GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized * speed * Time.deltaTime);
+    }
+
+    private void EnemyDie()
+    {
+        isLive = false;
     }
 
     public void Attack(int damage)

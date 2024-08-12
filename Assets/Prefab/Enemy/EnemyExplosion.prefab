@@ -104,6 +104,7 @@ MonoBehaviour:
   maxHp: 5
   ground: 0
   speed: 1
+  isLive: 1
 --- !u!114 &-3005552117092911712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1399fe010f914140a255322e952f4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 3
+  BoomEffect: {fileID: 3808836575339413615, guid: 8dbd789cf399f7143bf6677224b41ed0, type: 3}
+  explosionRadius: 2
   explosionDamage: 5
 --- !u!50 &4256181652278600972
 Rigidbody2D:

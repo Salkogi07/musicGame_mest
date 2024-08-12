@@ -5,6 +5,7 @@ using UnityEngine;
 public class Explosion_Enemy : MonoBehaviour
 {
     Enemy enemy;
+    public GameObject BoomEffect;
     public float explosionRadius;
     public int explosionDamage;
 
@@ -13,13 +14,15 @@ public class Explosion_Enemy : MonoBehaviour
         enemy = GetComponent<Enemy>();
     }
 
-    private void OnDisable()
+    private void Update()
     {
-        Explosion();
+        if (!enemy.isLive)
+            Explosion();
     }
 
     void Explosion()
     {
+        Instantiate(BoomEffect,transform.position, Quaternion.identity);
         Collider2D[] enemyObj = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
         foreach (Collider2D collider in enemyObj)
         {
@@ -28,5 +31,12 @@ public class Explosion_Enemy : MonoBehaviour
                 collider.GetComponent<Enemy>().hp -= explosionDamage;
             }
         }
+        Destroy(gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, explosionRadius);
     }
 }
