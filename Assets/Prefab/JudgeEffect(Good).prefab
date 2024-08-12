@@ -119,4 +119,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f93fccba13d8b45ac7316a4a59d122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  druingEffect: 0.5
+  druingEffect: 0.1
