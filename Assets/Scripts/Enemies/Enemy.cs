@@ -9,8 +9,14 @@ public class Enemy : MonoBehaviour
     public bool ground;
 
     public float speed;
+    public float originalSpeed;
 
     public bool isLive = true;
+
+    private void Awake()
+    {
+        originalSpeed = speed;
+    }
 
     public void Update()
     {

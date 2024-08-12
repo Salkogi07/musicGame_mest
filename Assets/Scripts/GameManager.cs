@@ -23,10 +23,13 @@ public class GameManager : MonoBehaviour
     public float bossSkillGhostTimer = 0;
     public float bossSkillReverseTimer = 0;
 
+    Player player;
+
 
     private void Awake()
     {
         Instance = this;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     void Start()
@@ -37,6 +40,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Change_PlayerHp(int changeValue)
+    {
+        player.hp = Mathf.Clamp(player.hp + changeValue, 0, player.maxHp);
     }
 
     public void UseBossSkillCloud()

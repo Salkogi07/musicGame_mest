@@ -33,10 +33,4 @@ public class Explosion_Enemy : MonoBehaviour
         }
         Destroy(gameObject);
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, explosionRadius);
-    }
 }

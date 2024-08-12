@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +11,15 @@ public class Player : MonoBehaviour
     public float attackRange;
     public int attackDamage;
 
+    public bool isAttack;
+
+    Animator anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     private void Start()
     {
         StartCoroutine(AttackRoutine());
@@ -19,14 +27,17 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        
+        if (isAttack)
+            PlayAnimation("Attack");
+        else
+            PlayAnimation("Idle");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Enemy")
         {
-            hp -= other.GetComponent<Enemy>().hp;
+            GameManager.Instance.Change_PlayerHp(-other.GetComponent<Enemy>().hp);
             Destroy(other.gameObject);
         }
     }
@@ -53,6 +64,7 @@ public class Player : MonoBehaviour
                 break;
             if (Vector3.Distance(enemyGameObjects[i].transform.position, transform.position) > attackRange)
                 break;
+  
             enemyGameObjects[i].GetComponent<Enemy>().Attack(attackDamage);
         }
     }
@@ -120,6 +132,17 @@ public class Player : MonoBehaviour
             }
 
             yield return new WaitForSeconds(attackTime);
+        }
+    }
+
+    private string lastAnimation = null;
+
+    public void PlayAnimation(string animName)
+    {
+        if (lastAnimation != animName)
+        {
+            anim.Play(animName);
+            lastAnimation = animName;
         }
     }
 }
