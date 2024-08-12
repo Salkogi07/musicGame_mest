@@ -81,22 +81,22 @@ public class Player : MonoBehaviour
                 if (GameManager.Instance.groundGauge > 80)
                 {
                     AttackNearEnemies(enemies, 8);
-                    GameManager.Instance.groundGauge -= 1;
+                    GameManager.Instance.Change_GroundGauge(-1);
                 }
                 else if (GameManager.Instance.groundGauge > 40)
                 {
                     AttackNearEnemies(enemies, 4);
-                    GameManager.Instance.groundGauge -= 1;
+                    GameManager.Instance.Change_GroundGauge(-1);
                 }
                 else if (GameManager.Instance.groundGauge > 20)
                 {
                     AttackNearEnemies(enemies, 2);
-                    GameManager.Instance.groundGauge -= 1;
+                    GameManager.Instance.Change_GroundGauge(-1);
                 }
                 else if (GameManager.Instance.groundGauge >= 1)
                 {
                     AttackNearEnemies(enemies, 1);
-                    GameManager.Instance.groundGauge -= 1;
+                    GameManager.Instance.Change_GroundGauge(-1);
                 }
                 else
                 {
@@ -108,22 +108,22 @@ public class Player : MonoBehaviour
                 if (GameManager.Instance.airGauge > 80)
                 {
                     AttackNearEnemies(airEnemies, 8);
-                    GameManager.Instance.airGauge -= 1;
+                    GameManager.Instance.Change_AirGauge(-1);
                 }
                 else if (GameManager.Instance.airGauge > 40)
                 {
                     AttackNearEnemies(airEnemies, 4);
-                    GameManager.Instance.airGauge -= 1;
+                    GameManager.Instance.Change_GroundGauge(-1);
                 }
                 else if (GameManager.Instance.airGauge > 20)
                 {
                     AttackNearEnemies(airEnemies, 2);
-                    GameManager.Instance.airGauge -= 1;
+                    GameManager.Instance.Change_GroundGauge(-1);
                 }
                 else if (GameManager.Instance.airGauge >= 1)
                 {
                     AttackNearEnemies(airEnemies, 1);
-                    GameManager.Instance.airGauge -= 1;
+                    GameManager.Instance.Change_GroundGauge(-1);
                 }
                 else
                 {
