@@ -84,22 +84,22 @@ public class GameManager : MonoBehaviour
         {
             if (judge == Judge.Perfect)
             {
-                groundGauge += note.second_energy * 2;
+                Change_GroundGauge(note.second_energy * 2);
             }
             else if (judge == Judge.Good)
             {
-                groundGauge += note.second_energy * 1;
+                Change_GroundGauge(note.second_energy * 1);
             }
         }
         else
         {
             if (judge == Judge.Perfect)
             {
-                groundGauge += note.energy * 2;
+                Change_GroundGauge(note.energy * 2);
             }
             else if (judge == Judge.Good)
             {
-                groundGauge += note.energy * 1;
+                Change_GroundGauge(groundGauge += note.energy * 1);
             }
         }
     }
@@ -114,25 +114,35 @@ public class GameManager : MonoBehaviour
         {
             if (judge == Judge.Perfect)
             {
-                airGauge += note.second_energy * 2;
+                Change_AirGauge(note.second_energy * 2);
             }
             else if (judge == Judge.Good)
             {
-                airGauge += note.second_energy * 1;
+                Change_AirGauge(note.second_energy * 1);
             }
         }
         else
         {
             if (judge == Judge.Perfect)
             {
-                airGauge += note.energy * 2;
+                Change_AirGauge(note.energy * 2);
             }
             else if (judge == Judge.Good)
             {
-                airGauge += note.energy * 1;
+                Change_AirGauge(note.energy * 1);
             }
         }
     }
+
+    public void Change_GroundGauge(int value)
+    {
+        groundGauge = Mathf.Clamp(groundGauge + value, 0, maxGroundGauge);
+    }
+    public void Change_AirGauge(int value)
+    {
+        airGauge = Mathf.Clamp(airGauge + value, 0, maxAirGauge);
+    }
+
 
     public float GetRemainingSeconds(GameObject note)
     {
