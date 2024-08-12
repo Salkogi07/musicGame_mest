@@ -9,12 +9,12 @@ public class HUD : MonoBehaviour
     public InfoType type;
 
     Text myText;
-    Slider mySlider;
+    Image mySlider;
 
     private void Awake()
     {
         myText = GetComponent<Text>();
-        mySlider = GetComponent<Slider>();
+        mySlider = GetComponent<Image>();
     }
 
     private void LateUpdate()
@@ -24,17 +24,17 @@ public class HUD : MonoBehaviour
             case InfoType.Hp:
                 float curHealth = GameManager.Instance.player.hp;
                 float maxHealth = GameManager.Instance.player.maxHp;
-                mySlider.value = curHealth / maxHealth;
+                mySlider.fillAmount = curHealth / maxHealth;
                 break;
             case InfoType.GroundGauge:
                 float gauge_G = GameManager.Instance.groundGauge;
                 float maxGauge_G = GameManager.Instance.maxGroundGauge;
-                mySlider.value = gauge_G / maxGauge_G;
+                mySlider.fillAmount = gauge_G / maxGauge_G;
                 break;
             case InfoType.AirGauge:
                 float gauge_A = GameManager.Instance.airGauge;
                 float maxGauge_A = GameManager.Instance.maxAirGauge;
-                mySlider.value = gauge_A / maxGauge_A;
+                mySlider.fillAmount = gauge_A / maxGauge_A;
                 break;
         }
     }

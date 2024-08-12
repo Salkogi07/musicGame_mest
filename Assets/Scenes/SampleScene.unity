@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 267573992}
   - component: {fileID: 267573994}
   - component: {fileID: 267573993}
+  - component: {fileID: 267573995}
   m_Layer: 5
   m_Name: AirGaugeValue
   m_TagString: Untagged
@@ -390,6 +391,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267573991}
   m_CullTransparentMesh: 1
+--- !u!114 &267573995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267573991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0c52469a631dc44ad4d260d66c570b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1 &295342100
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,10 +876,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundGauge: 0
+  maxGroundGauge: 100
   airGauge: 0
+  maxAirGauge: 100
   bossSkillCloudTimer: 0
   bossSkillGhostTimer: 0
   bossSkillReverseTimer: 0
+  player: {fileID: 0}
 --- !u!4 &693320779
 Transform:
   m_ObjectHideFlags: 0
@@ -1630,6 +1647,7 @@ GameObject:
   - component: {fileID: 1641172246}
   - component: {fileID: 1641172248}
   - component: {fileID: 1641172247}
+  - component: {fileID: 1641172249}
   m_Layer: 5
   m_Name: HpValue
   m_TagString: Untagged
@@ -1694,6 +1712,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641172245}
   m_CullTransparentMesh: 1
+--- !u!114 &1641172249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641172245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0c52469a631dc44ad4d260d66c570b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1 &1734387183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1896,6 +1927,7 @@ GameObject:
   - component: {fileID: 1903729738}
   - component: {fileID: 1903729740}
   - component: {fileID: 1903729739}
+  - component: {fileID: 1903729741}
   m_Layer: 5
   m_Name: GroundGaugeValue
   m_TagString: Untagged
@@ -1960,6 +1992,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903729737}
   m_CullTransparentMesh: 1
+--- !u!114 &1903729741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903729737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0c52469a631dc44ad4d260d66c570b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &1931070862
 GameObject:
   m_ObjectHideFlags: 0
@@ -2011,7 +2056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.63522005, g: 0.63522005, b: 0.63522005, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
