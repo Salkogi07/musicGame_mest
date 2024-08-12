@@ -40,6 +40,11 @@ public class Player : MonoBehaviour
             GameManager.Instance.Change_PlayerHp(-other.GetComponent<Enemy>().hp);
             Destroy(other.gameObject);
         }
+        if (other.tag == "AirEnemy")
+        {
+            GameManager.Instance.Change_PlayerHp(-other.GetComponent<Enemy>().hp);
+            Destroy(other.gameObject);
+        }
     }
 
     private GameObject[] GetEnemies()
