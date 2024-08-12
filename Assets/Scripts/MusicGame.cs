@@ -20,6 +20,7 @@ public class MusicGame : MonoBehaviour
     public GameObject[] noteInstances;
     public GameObject[] judges;
 
+    public GameObject[] judgeEffect;
     public NotePrefabInfo[] notePrefabs;
     private Dictionary<string, GameObject> notePrefabDictionary = new Dictionary<string, GameObject>();
 
@@ -170,6 +171,7 @@ public class MusicGame : MonoBehaviour
 
             if (positionDifference < 0.25f * RADIUS)
             {
+                Instantiate(judgeEffect[0], currentNode.transform.position, Quaternion.identity);
                 if (isGround)
                     GameManager.Instance.HitNoteWithGround(currentNode, GameManager.Judge.Perfect);
                 else
@@ -177,6 +179,7 @@ public class MusicGame : MonoBehaviour
             }
             else if (positionDifference < 0.8f * RADIUS)
             {
+                Instantiate(judgeEffect[1], currentNode.transform.position, Quaternion.identity);
                 if (isGround)
                     GameManager.Instance.HitNoteWithGround(currentNode, GameManager.Judge.Good);
                 else
@@ -184,6 +187,7 @@ public class MusicGame : MonoBehaviour
             }
             else
             {
+                Instantiate(judgeEffect[2], currentNode.transform.position, Quaternion.identity);
                 if (isGround)
                     GameManager.Instance.HitNoteWithGround(currentNode, GameManager.Judge.Miss);
                 else

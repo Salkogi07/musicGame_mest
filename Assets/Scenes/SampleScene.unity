@@ -846,6 +846,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &594170084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 594170085}
+  m_Layer: 0
+  m_Name: JudgeTextPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &594170085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594170084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.65, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 926363462}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &693320777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,6 +1082,10 @@ MonoBehaviour:
   - {fileID: 1415570907}
   - {fileID: 998407879}
   - {fileID: 1734387183}
+  judgeEffect:
+  - {fileID: 3324278081837907593, guid: 13b00ee423a64314d841963197ba745b, type: 3}
+  - {fileID: 8279330621219327434, guid: dde686de76eb95149948e635824370e7, type: 3}
+  - {fileID: 1137277563448093664, guid: b76f377057836d3459c095ba30d08059, type: 3}
   notePrefabs:
   - name: X...
     prefab: {fileID: 8491351499179293373, guid: bd43bc3d2bf7cda4497d4587ca3a98fb, type: 3}
@@ -1151,6 +1186,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 594170085}
   - {fileID: 760233749}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
