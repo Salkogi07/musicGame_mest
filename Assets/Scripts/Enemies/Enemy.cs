@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     public void Update()
     {
         if (hp <= 0)
-            Destroy(gameObject);
+            gameObject.SetActive(false);
 
         transform.Translate((GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized * speed * Time.deltaTime);
     }
