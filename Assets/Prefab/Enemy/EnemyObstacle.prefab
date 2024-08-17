@@ -104,7 +104,7 @@ MonoBehaviour:
   hp: 5
   maxHp: 5
   ground: 0
-  speed: 1
+  speed: 0.5
   originalSpeed: 0
   isLive: 1
 --- !u!114 &6114205431336575221
