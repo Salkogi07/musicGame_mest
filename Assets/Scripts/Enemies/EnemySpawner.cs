@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject testEnemy;
+    public GameObject[] enemyPrefab;
     public GameObject[] spawnPoints;
 
     public float spawnTime;
@@ -38,8 +38,8 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnTime);
-
-            Instantiate(testEnemy, spawnPoints[GetFromBag()].transform.position, Quaternion.identity);
+            int randomEnemy = Random.Range(0, enemyPrefab.Length);
+            Instantiate(enemyPrefab[randomEnemy], spawnPoints[GetFromBag()].transform.position, Quaternion.identity);
         }
     }
 }

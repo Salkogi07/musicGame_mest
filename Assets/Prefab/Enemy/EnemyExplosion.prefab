@@ -100,10 +100,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c524e1cee418d4eb5154d37f64f740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDieSkill: 1
   hp: 5
   maxHp: 5
   ground: 0
   speed: 1
+  originalSpeed: 0
   isLive: 1
 --- !u!114 &-3005552117092911712
 MonoBehaviour:

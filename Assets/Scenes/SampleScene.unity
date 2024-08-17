@@ -1219,7 +1219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f20469ba278de4fbf233de3b5e2694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testEnemy: {fileID: 8077578747364352409, guid: c0cc1efad2eb10d40a6f68454bc5ebdf, type: 3}
+  enemyPrefab:
+  - {fileID: 8577983787784971757, guid: 31f4c3390d5767a4fb28182a51546415, type: 3}
+  - {fileID: 8577983787784971757, guid: ca9c26524dcc4ff43b054d6129fe5459, type: 3}
+  - {fileID: 8577983787784971757, guid: 5e5be3a31c9cc564699bc90c436b8fb8, type: 3}
+  - {fileID: 8077578747364352409, guid: c0cc1efad2eb10d40a6f68454bc5ebdf, type: 3}
   spawnPoints:
   - {fileID: 156226590}
   - {fileID: 861542632}
