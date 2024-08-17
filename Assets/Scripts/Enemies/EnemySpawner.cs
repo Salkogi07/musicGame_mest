@@ -78,6 +78,6 @@ public class EnemySpawner : MonoBehaviour
         }
         isBoss = false;
 
-
+        GameManager.Instance.GameWin();
     }
 }

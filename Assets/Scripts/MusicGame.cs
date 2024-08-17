@@ -168,20 +168,23 @@ public class MusicGame : MonoBehaviour
             // 판정 관련 내용들
             currentNode.HitNote(noteIndex);
 
-            float positionDifference = Mathf.Abs(GetCurrentNotesPosition() - (-notes.transform.localPosition.y));
-            bool early = GetCurrentNotesPosition() > (-notes.transform.localPosition.y);
+            if (currentNode.item == Note.Item.None)
+            {
+                float positionDifference = Mathf.Abs(GetCurrentNotesPosition() - (-notes.transform.localPosition.y));
+                bool early = GetCurrentNotesPosition() > (-notes.transform.localPosition.y);
 
-            if (positionDifference < 0.25f * RADIUS)
-            {
-                TryJudge(scoreIndex, isGround, GameManager.Judge.Perfect);
-            }
-            else if (positionDifference < 0.8f * RADIUS)
-            {
-                TryJudge(scoreIndex, isGround, GameManager.Judge.Good);
-            }
-            else
-            {
-                TryJudge(scoreIndex, isGround, GameManager.Judge.Miss);
+                if (positionDifference < 0.25f * RADIUS)
+                {
+                    TryJudge(scoreIndex, isGround, GameManager.Judge.Perfect);
+                }
+                else if (positionDifference < 0.8f * RADIUS)
+                {
+                    TryJudge(scoreIndex, isGround, GameManager.Judge.Good);
+                }
+                else
+                {
+                    TryJudge(scoreIndex, isGround, GameManager.Judge.Miss);
+                }
             }
 
             if (!currentNode.isMultiNode || currentNode.IsBothPressed())
@@ -189,7 +192,10 @@ public class MusicGame : MonoBehaviour
         }
         else if (noteIndex == 0)
         {
-            TryJudge(scoreIndex, isGround, GameManager.Judge.Miss);
+            if (currentNode.item == Note.Item.None)
+            {
+                TryJudge(scoreIndex, isGround, GameManager.Judge.Miss);
+            }
         }
     }
 
@@ -208,6 +214,21 @@ public class MusicGame : MonoBehaviour
             return;
         }
 
+        if (judge == GameManager.Judge.Perfect)
+        {
+            GameManager.Instance.judgePerfectCount += 1;
+            GameManager.Instance.noteCount += 1;
+        }
+        else if (judge == GameManager.Judge.Good)
+        {
+            GameManager.Instance.judgeGoodCount += 1;
+            GameManager.Instance.noteCount += 1;
+        }
+        else if (judge == GameManager.Judge.Miss)
+        {
+            GameManager.Instance.judgeMissCount += 1;
+            GameManager.Instance.noteCount+= 1;
+        }
 
         Note currentNode = noteInstances[scoreIndex].GetComponent<Note>();
         float positionDifference = Mathf.Abs(GetCurrentNotesPosition() - (-notes.transform.localPosition.y));

@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour
 
     private void EnemyDie()
     {
+        GameManager.Instance.monsterKillCount += 1;
+
         if(isDieSkill)
             isLive = false;
         else

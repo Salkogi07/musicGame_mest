@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static GameManager;
 
 public class GameManager : MonoBehaviour
@@ -31,7 +33,21 @@ public class GameManager : MonoBehaviour
     public float itemPerfectTimer = 0;
     public int itemMissDefenseCount = 0;
 
+    public float playTime = 0;
+    public float itemCount = 0;
+    public float judgePerfectCount = 0;
+    public float judgeGoodCount = 0;
+    public float judgeMissCount = 0;
+    public float noteCount = 0;
+    public float finalScore = 0;
+    public float monsterKillCount = 0;
+
     public Player player;
+
+    public GameObject winPanel;
+    public GameObject losePanel;
+    public Text resultText;
+    public InputField nameInputField;
 
 
     private void Awake()
@@ -47,6 +63,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        playTime += Time.deltaTime;
+
         itemMonsterPauseTimer -= Time.deltaTime;
         itemEnergyTimer -= Time.deltaTime;
         itemTimerTimer -= Time.deltaTime;
@@ -56,6 +74,8 @@ public class GameManager : MonoBehaviour
     public void Change_PlayerHp(int changeValue)
     {
         player.hp = Mathf.Clamp(player.hp + changeValue, 0, player.maxHp);
+        if (player.hp <= 0)
+            GameLose();
     }
 
     public void UseBossSkillCloud()
@@ -159,5 +179,60 @@ public class GameManager : MonoBehaviour
             return ((3.5f) - note.transform.position.y) / SPEED;
         else
             return (note.transform.position.y - (-3.5f)) / SPEED;
+    }
+
+    public void GameWin()
+    {
+        int score = Mathf.FloorToInt(judgePerfectCount * 100 + judgeGoodCount * 50 + monsterKillCount * 100);
+
+        float totalJudge = (judgePerfectCount + judgeGoodCount * 0.5f) / noteCount * 100;
+        resultText.text = $"Play Time: {string.Format("{0:####.00}", playTime)}s\n" +
+            $"Item Count: {itemCount}\n" +
+            $"Notes: {noteCount}\n" +
+            $"Total Perfect Rate: {string.Format("{0:###.00}", totalJudge)}%\n" +
+            $"Average Perfect Rate: {string.Format("{0:###.00}", totalJudge)}%\n" +
+            $"Total Score: {score}\n" +
+            $"Monster Kill Count: {monsterKillCount}\n";
+
+        winPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void RankName()
+    {
+        Debug.Log(nameInputField.text);
+        int score = Mathf.FloorToInt(judgePerfectCount * 100 + judgeGoodCount * 50 + monsterKillCount * 100);
+        SaveNaver.instance.InsertRank(nameInputField.text, score);
+        nameInputField.gameObject.SetActive(false);
+    }
+
+    public void GameLose()
+    {
+        losePanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void Menu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+    }
+
+    public void Stage1()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(1);
+    }
+
+    public void Stage2()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(2);
+    }
+
+    public void Ending()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(3);
     }
 }

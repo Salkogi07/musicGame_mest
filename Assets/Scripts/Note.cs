@@ -88,26 +88,32 @@ public class Note : MonoBehaviour
             isPositionPressed = true;
             if (item == Item.Heal)
             {
+                GameManager.Instance.itemCount += 1;
                 GameManager.Instance.Change_PlayerHp(50);
             }
             else if (item == Item.MonsterPause)
             {
+                GameManager.Instance.itemCount += 1;
                 GameManager.Instance.itemMonsterPauseTimer = 2;
             }
             else if (item == Item.Energy)
             {
+                GameManager.Instance.itemCount += 1;
                 GameManager.Instance.itemMonsterPauseTimer = 4;
             }
             else if (item == Item.MissDefense)
             {
+                GameManager.Instance.itemCount += 1;
                 GameManager.Instance.itemMissDefenseCount = 10;
             }
             else if (item == Item.Timer)
             {
+                GameManager.Instance.itemCount += 1;
                 GameManager.Instance.itemTimerTimer = 2;
             }
             else if (item == Item.Perfect)
             {
+                GameManager.Instance.itemCount += 1;
                 GameManager.Instance.itemPerfectTimer = 5;
             }
         }
