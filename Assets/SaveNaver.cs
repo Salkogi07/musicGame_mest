@@ -9,7 +9,7 @@ public class SaveNaver : MonoBehaviour
     public string[] Rankname = new string[10];
     public int[] Score = new int[10];
 
-    void Start()
+    void Awake()
     {
         if(instance == null)
         {
