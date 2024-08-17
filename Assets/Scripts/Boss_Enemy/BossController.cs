@@ -6,6 +6,11 @@ public class BossController : MonoBehaviour
 {
     public GameObject reverseObj;
 
+    private void Start()
+    {
+        StartCoroutine(BossRoutine());
+    }
+
     void Update()
     {
         BossSkill_CoolTime();
@@ -34,10 +39,23 @@ public class BossController : MonoBehaviour
             reverseObj.transform.localScale = new Vector3(1, 1, 1);
     }
 
-    private static void BossSkill_CoolTime()
+    private void BossSkill_CoolTime()
     {
         GameManager.Instance.bossSkillCloudTimer -= Time.deltaTime;
         GameManager.Instance.bossSkillGhostTimer -= Time.deltaTime;
         GameManager.Instance.bossSkillReverseTimer -= Time.deltaTime;
+    }
+
+    private IEnumerator BossRoutine()
+    {
+        while (true)
+        {
+            GameManager.Instance.UseBossSkillCloud();
+            yield return new WaitForSeconds(5);
+            GameManager.Instance.UseBossSkillGhost();
+            yield return new WaitForSeconds(5);
+            GameManager.Instance.UseBossSkillReverse();
+            yield return new WaitForSeconds(5);
+        }
     }
 }

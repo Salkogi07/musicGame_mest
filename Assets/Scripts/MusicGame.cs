@@ -12,7 +12,7 @@ public class NotePrefabInfo
 
 public class MusicGame : MonoBehaviour
 {
-    private const float RADIUS = 1;
+    private const float RADIUS = 0.5f;
 
     private AudioSource audio;
     public GameObject notes;
@@ -171,7 +171,8 @@ public class MusicGame : MonoBehaviour
 
             if (positionDifference < 0.25f * RADIUS)
             {
-                Instantiate(judgeEffect[0], currentNode.transform.position, Quaternion.identity);
+                GameObject effectInstance = Instantiate(judgeEffect[0], transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                effectInstance.GetComponent<JudgeEffect>().SetText(early, Mathf.RoundToInt(positionDifference / RADIUS * 100));
                 if (isGround)
                     GameManager.Instance.HitNoteWithGround(currentNode, GameManager.Judge.Perfect);
                 else
@@ -179,7 +180,8 @@ public class MusicGame : MonoBehaviour
             }
             else if (positionDifference < 0.8f * RADIUS)
             {
-                Instantiate(judgeEffect[1], currentNode.transform.position, Quaternion.identity);
+                GameObject effectInstance = Instantiate(judgeEffect[1], transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                effectInstance.GetComponent<JudgeEffect>().SetText(early, Mathf.RoundToInt(positionDifference / RADIUS * 100));
                 if (isGround)
                     GameManager.Instance.HitNoteWithGround(currentNode, GameManager.Judge.Good);
                 else
@@ -187,7 +189,7 @@ public class MusicGame : MonoBehaviour
             }
             else
             {
-                Instantiate(judgeEffect[2], currentNode.transform.position, Quaternion.identity);
+                Instantiate(judgeEffect[2], transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 if (isGround)
                     GameManager.Instance.HitNoteWithGround(currentNode, GameManager.Judge.Miss);
                 else
@@ -196,6 +198,14 @@ public class MusicGame : MonoBehaviour
 
             if (!currentNode.isMultiNode || currentNode.IsBothPressed())
                 DestroyNote(scoreIndex);
+        }
+        else if (noteIndex == 0)
+        {
+            Instantiate(judgeEffect[2], transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            if (isGround)
+                GameManager.Instance.HitNoteWithGround(currentNode, GameManager.Judge.Miss);
+            else
+                GameManager.Instance.HitNoteWithAir(currentNode, GameManager.Judge.Miss);
         }
     }
 

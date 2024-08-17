@@ -5,7 +5,7 @@ using static GameManager;
 
 public class GameManager : MonoBehaviour
 {
-    public const float SPEED = 7.0f;
+    public const float SPEED = 3.5f;
 
     public enum Judge
     {
