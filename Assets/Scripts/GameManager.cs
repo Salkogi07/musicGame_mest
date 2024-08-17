@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
     public float bossSkillGhostTimer = 0;
     public float bossSkillReverseTimer = 0;
 
+    public float itemMonsterPauseTimer = 0;
+    public float itemEnergyTimer = 0;
+    public float itemTimerTimer = 0;
+    public float itemPerfectTimer = 0;
+    public int itemMissDefenseCount = 0;
+
     public Player player;
 
 
@@ -41,7 +47,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        itemMonsterPauseTimer -= Time.deltaTime;
+        itemEnergyTimer -= Time.deltaTime;
+        itemTimerTimer -= Time.deltaTime;
+        itemPerfectTimer -= Time.deltaTime;
     }
 
     public void Change_PlayerHp(int changeValue)
@@ -136,11 +145,11 @@ public class GameManager : MonoBehaviour
 
     public void Change_GroundGauge(int value)
     {
-        groundGauge = Mathf.Clamp(groundGauge + value, 0, maxGroundGauge);
+        groundGauge = Mathf.Clamp(groundGauge + value * (itemEnergyTimer > 0 ? 2 : 1), 0, maxGroundGauge);
     }
     public void Change_AirGauge(int value)
     {
-        airGauge = Mathf.Clamp(airGauge + value, 0, maxAirGauge);
+        airGauge = Mathf.Clamp(airGauge + value * (itemEnergyTimer > 0 ? 2 : 1), 0, maxAirGauge);
     }
 
 

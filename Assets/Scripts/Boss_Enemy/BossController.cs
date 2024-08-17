@@ -16,19 +16,6 @@ public class BossController : MonoBehaviour
         BossSkill_CoolTime();
 
         BossSkill_Reverse();
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            GameManager.Instance.UseBossSkillGhost();
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            GameManager.Instance.UseBossSkillReverse();
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            GameManager.Instance.UseBossSkillCloud();
-        }
     }
 
     private void BossSkill_Reverse()
@@ -51,11 +38,11 @@ public class BossController : MonoBehaviour
         while (true)
         {
             GameManager.Instance.UseBossSkillCloud();
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(8);
             GameManager.Instance.UseBossSkillGhost();
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(8);
             GameManager.Instance.UseBossSkillReverse();
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(8);
         }
     }
 }

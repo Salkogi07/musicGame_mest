@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDieSkill: 0
-  hp: 5
-  maxHp: 5
+  hp: 1
+  maxHp: 1
   ground: 0
   speed: 0.5
   originalSpeed: 0

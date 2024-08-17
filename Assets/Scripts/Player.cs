@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
             isAttack = true;
             yield return new WaitForSeconds(0.2f);
             isAttack = false;
-            yield return new WaitForSeconds(attackTime);
+            yield return new WaitForSeconds(GameManager.Instance.itemTimerTimer > 0 ? attackTime * 0.5f : attackTime);
         }
     }
 

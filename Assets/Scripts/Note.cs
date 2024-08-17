@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Note : MonoBehaviour
 {
+    public enum Item { None, Heal, MonsterPause, Energy, MissDefense, Timer, Perfect }
+
+    public Item item;
+
     public bool isMultiNode;
 
     public int position;
@@ -82,6 +86,30 @@ public class Note : MonoBehaviour
         if (index == position && !isPositionPressed)
         {
             isPositionPressed = true;
+            if (item == Item.Heal)
+            {
+                GameManager.Instance.Change_PlayerHp(50);
+            }
+            else if (item == Item.MonsterPause)
+            {
+                GameManager.Instance.itemMonsterPauseTimer = 2;
+            }
+            else if (item == Item.Energy)
+            {
+                GameManager.Instance.itemMonsterPauseTimer = 4;
+            }
+            else if (item == Item.MissDefense)
+            {
+                GameManager.Instance.itemMissDefenseCount = 10;
+            }
+            else if (item == Item.Timer)
+            {
+                GameManager.Instance.itemTimerTimer = 2;
+            }
+            else if (item == Item.Perfect)
+            {
+                GameManager.Instance.itemPerfectTimer = 5;
+            }
         }
         else if (index == position_multi && !isPositionMultiPressed)
         {

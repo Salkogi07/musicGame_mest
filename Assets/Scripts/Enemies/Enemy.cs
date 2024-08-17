@@ -27,6 +27,9 @@ public class Enemy : MonoBehaviour
         if (isHit)
             return;
 
+        if (GameManager.Instance.itemMonsterPauseTimer > 0)
+            return;
+
         if (hp <= 0)
             EnemyDie();
 

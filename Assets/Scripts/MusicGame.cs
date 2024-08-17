@@ -78,6 +78,8 @@ public class MusicGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        audio.pitch = GameManager.Instance.itemTimerTimer > 0 ? 0.5f : 1;
+
         notes.transform.localPosition = Vector3.down * audio.time * GameManager.SPEED;
 
         // 입력 처리
@@ -171,29 +173,15 @@ public class MusicGame : MonoBehaviour
 
             if (positionDifference < 0.25f * RADIUS)
             {
-                GameObject effectInstance = Instantiate(judgeEffect[0], transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-                effectInstance.GetComponent<JudgeEffect>().SetText(early, Mathf.RoundToInt(positionDifference / RADIUS * 100));
-                if (isGround)
-                    GameManager.Instance.HitNoteWithGround(currentNode, GameManager.Judge.Perfect);
-                else
-                    GameManager.Instance.HitNoteWithAir(currentNode, GameManager.Judge.Perfect);
+                TryJudge(scoreIndex, isGround, GameManager.Judge.Perfect);
             }
             else if (positionDifference < 0.8f * RADIUS)
             {
-                GameObject effectInstance = Instantiate(judgeEffect[1], transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-                effectInstance.GetComponent<JudgeEffect>().SetText(early, Mathf.RoundToInt(positionDifference / RADIUS * 100));
-                if (isGround)
-                    GameManager.Instance.HitNoteWithGround(currentNode, GameManager.Judge.Good);
-                else
-                    GameManager.Instance.HitNoteWithAir(currentNode, GameManager.Judge.Good);
+                TryJudge(scoreIndex, isGround, GameManager.Judge.Good);
             }
             else
             {
-                Instantiate(judgeEffect[2], transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-                if (isGround)
-                    GameManager.Instance.HitNoteWithGround(currentNode, GameManager.Judge.Miss);
-                else
-                    GameManager.Instance.HitNoteWithAir(currentNode, GameManager.Judge.Miss);
+                TryJudge(scoreIndex, isGround, GameManager.Judge.Miss);
             }
 
             if (!currentNode.isMultiNode || currentNode.IsBothPressed())
@@ -201,12 +189,47 @@ public class MusicGame : MonoBehaviour
         }
         else if (noteIndex == 0)
         {
-            Instantiate(judgeEffect[2], transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-            if (isGround)
-                GameManager.Instance.HitNoteWithGround(currentNode, GameManager.Judge.Miss);
-            else
-                GameManager.Instance.HitNoteWithAir(currentNode, GameManager.Judge.Miss);
+            TryJudge(scoreIndex, isGround, GameManager.Judge.Miss);
         }
+    }
+
+    void TryJudge(int scoreIndex, bool isGround, GameManager.Judge judge)
+    {
+        if (judge == GameManager.Judge.Miss && GameManager.Instance.itemMissDefenseCount > 0)
+        {
+            GameManager.Instance.itemMissDefenseCount -= 1;
+            TryJudge(scoreIndex, isGround, GameManager.Judge.Good);
+            return;
+        }
+
+        if (judge == GameManager.Judge.Good && GameManager.Instance.itemPerfectTimer > 0)
+        {
+            TryJudge(scoreIndex, isGround, GameManager.Judge.Perfect);
+            return;
+        }
+
+
+        Note currentNode = noteInstances[scoreIndex].GetComponent<Note>();
+        float positionDifference = Mathf.Abs(GetCurrentNotesPosition() - (-notes.transform.localPosition.y));
+        bool early = GetCurrentNotesPosition() > (-notes.transform.localPosition.y);
+
+        if (judge == GameManager.Judge.Perfect)
+        {
+            GameObject effectInstance = Instantiate(judgeEffect[0], transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            effectInstance.GetComponent<JudgeEffect>().SetText(early, Mathf.RoundToInt(positionDifference / RADIUS * 100));
+        }
+        else if (judge == GameManager.Judge.Good)
+        {
+            GameObject effectInstance = Instantiate(judgeEffect[1], transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            effectInstance.GetComponent<JudgeEffect>().SetText(early, Mathf.RoundToInt(positionDifference / RADIUS * 100));
+        }
+        else if (judge == GameManager.Judge.Miss)
+            Instantiate(judgeEffect[2], transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+
+        if (isGround)
+            GameManager.Instance.HitNoteWithGround(currentNode, judge);
+        else
+            GameManager.Instance.HitNoteWithAir(currentNode, judge);
     }
 
     void DestroyNote(int index)
