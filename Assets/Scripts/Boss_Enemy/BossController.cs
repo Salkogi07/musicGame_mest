@@ -21,9 +21,9 @@ public class BossController : MonoBehaviour
     private void BossSkill_Reverse()
     {
         if (GameManager.Instance.IsReverse())
-            reverseObj.transform.localScale = new Vector3(0.5f, -0.5f, 0.5f);
+            reverseObj.transform.localScale = new Vector3(1f, -1f, 1f);
         else
-            reverseObj.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            reverseObj.transform.localScale = new Vector3(1f, 1f, 1f);
     }
 
     private void BossSkill_CoolTime()
