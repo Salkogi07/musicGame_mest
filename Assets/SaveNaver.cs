@@ -51,8 +51,10 @@ public class SaveNaver : MonoBehaviour
         Score[0] = new_score;
     }
 
-    void Update()
+    public void saveSetting()
     {
-        
+        PlayerPrefs.SetInt("Score1",Score[0]);
+        PlayerPrefs.Save();
+        Debug.Log(PlayerPrefs.GetInt("Score1"));
     }
 }

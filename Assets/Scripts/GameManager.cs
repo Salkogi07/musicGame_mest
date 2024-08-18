@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     public int itemMissDefenseCount = 0;
 
     public float playTime = 0;
+    public int comboCount = 0;
     public float itemCount = 0;
     public float judgePerfectCount = 0;
     public float judgeGoodCount = 0;
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
     public GameObject losePanel;
     public Text resultText;
     public InputField nameInputField;
+    public Text comboText;
 
 
     private void Awake()
@@ -69,6 +72,8 @@ public class GameManager : MonoBehaviour
         itemEnergyTimer -= Time.deltaTime;
         itemTimerTimer -= Time.deltaTime;
         itemPerfectTimer -= Time.deltaTime;
+
+        comboText.text = comboCount.ToString();
     }
 
     public void Change_PlayerHp(int changeValue)
@@ -114,10 +119,12 @@ public class GameManager : MonoBehaviour
             if (judge == Judge.Perfect)
             {
                 Change_GroundGauge(note.second_energy * 2);
+                GroundGaugeCombo(note);
             }
             else if (judge == Judge.Good)
             {
                 Change_GroundGauge(note.second_energy * 1);
+                GroundGaugeCombo(note);
             }
         }
         else
@@ -125,11 +132,22 @@ public class GameManager : MonoBehaviour
             if (judge == Judge.Perfect)
             {
                 Change_GroundGauge(note.energy * 2);
+                GroundGaugeCombo(note);
             }
             else if (judge == Judge.Good)
             {
                 Change_GroundGauge(groundGauge += note.energy * 1);
+                GroundGaugeCombo(note);
             }
+        }
+    }
+
+    private void GroundGaugeCombo(Note note)
+    {
+        if(comboCount % 2 == 0 && comboCount != 0)
+        {
+            Change_GroundGauge(note.second_energy * 2);
+            Change_AirGauge(note.second_energy);
         }
     }
 
@@ -144,10 +162,12 @@ public class GameManager : MonoBehaviour
             if (judge == Judge.Perfect)
             {
                 Change_AirGauge(note.second_energy * 2);
+                AirGaugeCombo(note);
             }
             else if (judge == Judge.Good)
             {
                 Change_AirGauge(note.second_energy * 1);
+                AirGaugeCombo(note);
             }
         }
         else
@@ -155,11 +175,22 @@ public class GameManager : MonoBehaviour
             if (judge == Judge.Perfect)
             {
                 Change_AirGauge(note.energy * 2);
+                AirGaugeCombo(note);
             }
             else if (judge == Judge.Good)
             {
                 Change_AirGauge(note.energy * 1);
+                AirGaugeCombo(note);
             }
+        }
+    }
+
+    private void AirGaugeCombo(Note note)
+    {
+        if (comboCount % 2 == 0 && comboCount != 0)
+        {
+            Change_AirGauge(note.second_energy * 2);
+            Change_GroundGauge(note.second_energy);
         }
     }
 

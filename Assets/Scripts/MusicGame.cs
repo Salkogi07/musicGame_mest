@@ -218,16 +218,19 @@ public class MusicGame : MonoBehaviour
         {
             GameManager.Instance.judgePerfectCount += 1;
             GameManager.Instance.noteCount += 1;
+            GameManager.Instance.comboCount += 1;
         }
         else if (judge == GameManager.Judge.Good)
         {
             GameManager.Instance.judgeGoodCount += 1;
             GameManager.Instance.noteCount += 1;
+            GameManager.Instance.comboCount += 1;
         }
         else if (judge == GameManager.Judge.Miss)
         {
             GameManager.Instance.judgeMissCount += 1;
             GameManager.Instance.noteCount+= 1;
+            GameManager.Instance.comboCount = 0;
         }
 
         Note currentNode = noteInstances[scoreIndex].GetComponent<Note>();
