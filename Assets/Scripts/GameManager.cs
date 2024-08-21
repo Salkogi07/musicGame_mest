@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
         {
 
         }
-        else if (note.isMultiNode)
+        else if (note.isMultiNode && note.IsBothPressed())
         {
             if (judge == Judge.Perfect)
             {
